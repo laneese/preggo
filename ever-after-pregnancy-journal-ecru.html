@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ever After Pregnancy Journal — Écru Edition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream:       #fdfaf4;
+      --cream-card:  #ffffff;
+      --cream-deep:  #f5ede0;
+      --sage:        #7a9e8e;
+      --sage-light:  #e8f0eb;
+      --sage-mid:    #b8cfc5;
+      --blush:       #d4907a;
+      --blush-light: #f7ede8;
+      --blush-pale:  #fdf6f3;
+      --gold:        #b8905a;
+      --gold-light:  #fdf6e8;
+      --gold-rule:   #d4b07a;
+      --bark:        #6b4a2a;
+      --text:        #2c2518;
+      --text-mid:    #5a4a38;
+      --text-muted:  #8a7a68;
+      --border:      #e8e0d0;
+      --border-soft: #f0e8d8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── SIDEBAR ── */
+    aside {
+      width: 272px;
+      background: linear-gradient(180deg, #fdfaf4 0%, #f8f2e8 100%);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; bottom: 0; left: 0;
+      z-index: 50;
+    }
+
+    .brand {
+      padding: 36px 24px 24px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .brand-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .brand-edition {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    .brand-rule {
+      width: 40px;
+      height: 1px;
+      background: var(--gold-rule);
+      margin: 14px auto 0;
+      opacity: 0.5;
+    }
+
+    nav {
+      flex: 1;
+      padding: 16px 0;
+      overflow-y: auto;
+    }
+
+    .nav-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 11px 28px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 400;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-btn:hover { color: var(--text); background-color: var(--blush-pale); }
+
+    .nav-btn.active {
+      color: var(--gold);
+      background-color: var(--gold-light);
+      border-left: 3px solid var(--gold);
+      font-weight: 600;
+      padding-left: 25px;
+    }
+
+    .nav-icon { font-size: 14px; opacity: 0.7; flex-shrink: 0; }
+
+    .nav-save {
+      padding: 20px 20px 24px;
+      border-top: 1px solid var(--border);
+      background: var(--sage-light);
+    }
+
+    .btn-save-main {
+      width: 100%;
+      background: linear-gradient(135deg, var(--sage) 0%, #6a9080 100%);
+      color: white;
+      border: none;
+      padding: 13px;
+      border-radius: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      display: block;
+      text-align: center;
+    }
+
+    .btn-save-main:hover { opacity: 0.88; }
+
+    .save-sub {
+      font-size: 10px;
+      text-align: center;
+      color: var(--text-muted);
+      margin-top: 7px;
+      line-height: 1.4;
+    }
+
+    /* ── MAIN CONTENT ── */
+    main {
+      margin-left: 272px;
+      flex: 1;
+      padding: 52px 72px;
+      max-width: 1080px;
+    }
+
+    .tab-panel { display: none; animation: fadeUp 0.35s ease; }
+    .tab-panel.active { display: block; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .section-header {
+      margin-bottom: 36px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 44px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+
+    .section-hook {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--cream-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 32px;
+      margin-bottom: 28px;
+      box-shadow: 0 2px 12px rgba(107,74,42,0.04);
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--bark);
+      margin-bottom: 6px;
+    }
+
+    .card-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .card-blush {
+      background: var(--blush-pale);
+      border-color: #e8c8bc;
+    }
+
+    .card-sage {
+      background: #f4f8f6;
+      border-color: var(--sage-mid);
+    }
+
+    /* ── GRID ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+
+    /* ── FORM ── */
+    label {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    input[type="text"], input[type="date"], textarea, select {
+      width: 100%;
+      padding: 11px 15px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      transition: border 0.2s, background 0.2s;
+      margin-bottom: 16px;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--sage);
+      background: white;
+    }
+
+    textarea { resize: vertical; min-height: 100px; }
+
+    /* ── BIRTH PROMPTS ── */
+    .prompt-block {
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .prompt-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .prompt-q {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--bark);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    /* ── PHOTO SLOTS ── */
+    .photo-slot {
+      border: 2px dashed var(--sage-mid);
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      background: var(--sage-light);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      transition: border-color 0.2s;
+    }
+
+    .photo-slot:hover { border-color: var(--sage); }
+    .photo-slot img { position: absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:5; border-radius:6px; }
+    .photo-slot input[type="file"] { position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer; z-index:10; }
+    .photo-slot-icon { font-size: 28px; margin-bottom: 8px; z-index: 2; }
+    .photo-slot-text { font-size: 13px; color: var(--sage); font-weight: 500; z-index: 2; }
+    .photo-slot-sub { font-size: 11px; color: var(--text-muted); margin-top: 4px; z-index: 2; }
+
+    .size-warning {
+      font-size: 11px;
+      color: var(--gold);
+      margin-top: 8px;
+      background: var(--gold-light);
+      padding: 6px 10px;
+      border-radius: 4px;
+      border: 1px solid #e8d0a0;
+      display: none;
+      z-index: 2;
+    }
+
+    /* ── WEEKS GRID ── */
+    .weeks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(58px,1fr));
+      gap: 7px;
+      margin-bottom: 28px;
+      max-height: 158px;
+      overflow-y: auto;
+      padding-right: 8px;
+    }
+
+    .btn-week {
+      background: var(--cream-card);
+      border: 1px solid var(--border);
+      padding: 8px 4px;
+      border-radius: 5px;
+      font-size: 11.5px;
+      cursor: pointer;
+      text-align: center;
+      color: var(--text-muted);
+      transition: all 0.15s;
+    }
+
+    .btn-week:hover { border-color: var(--sage); color: var(--sage); }
+    .btn-week.active { background: var(--sage); color: white; border-color: var(--sage); font-weight: 600; }
+
+    .week-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    /* ── DYNAMIC ROWS ── */
+    .dynamic-row {
+      display: grid;
+      grid-template-columns: 130px 70px 1fr 2fr auto;
+      gap: 12px;
+      align-items: start;
+      padding: 14px 0;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .dynamic-row input { margin-bottom: 0; }
+
+    .btn-add {
+      background: var(--sage-light);
+      color: var(--sage);
+      border: 1px solid var(--sage-mid);
+      padding: 9px 18px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 500;
+      margin-top: 12px;
+      transition: all 0.15s;
+    }
+
+    .btn-add:hover { background: var(--sage); color: white; }
+    .btn-del { background: none; border: none; color: #c07070; cursor: pointer; font-size: 18px; padding: 4px; }
+
+    /* ── ACCORDION ── */
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 12px;
+      background: white;
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      width: 100%;
+      padding: 18px 26px;
+      text-align: left;
+      background: var(--cream-card);
+      border: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.18s;
+    }
+
+    .accordion-header:hover { background: var(--blush-pale); }
+
+    .accordion-content {
+      padding: 0 26px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.32s ease, padding 0.32s ease;
+      background: var(--cream);
+    }
+
+    .accordion-item.open .accordion-content {
+      padding: 26px;
+      max-height: 900px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── LETTER BOX (Keep Forever) ── */
+    .letter-box {
+      background: var(--cream-card);
+      border: 1px solid var(--gold-rule);
+      padding: 52px;
+      border-radius: 10px;
+      position: relative;
+      box-shadow: 0 8px 28px rgba(184,144,90,0.07);
+    }
+
+    .letter-box::before {
+      content: "";
+      position: absolute;
+      top: 8px; left: 8px; right: 8px; bottom: 8px;
+      border: 1px solid var(--border-soft);
+      border-radius: 6px;
+      pointer-events: none;
+    }
+
+    .letter-prose {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      line-height: 1.85;
+      color: var(--text-mid);
+      margin-bottom: 32px;
+    }
+
+    .letter-signoff {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--sage);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    /* ── TOAST ── */
+    #save-toast {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      background: var(--text);
+      color: white;
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 200;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blush) 0%, #c07870 100%);
+      color: white;
+      border: none;
+      padding: 11px 24px;
+      border-radius: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      margin-top: 4px;
+    }
+
+    .btn-primary:hover { opacity: 0.88; }
+
+    .btn-primary.sage {
+      background: linear-gradient(135deg, var(--sage) 0%, #6a9080 100%);
+    }
+
+    /* ── NAMES SECTION ── */
+    .names-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+    /* ── COLUMN HEADERS ── */
+    .col-header {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      font-weight: 600;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════
+     SIDEBAR
+════════════════════════════════════════════════ -->
+<aside>
+  <div class="brand">
+    <div class="brand-name">Ever After Memory Co.</div>
+    <div class="brand-title">Pregnancy Journal</div>
+    <div class="brand-edition">Écru Edition</div>
+    <div class="brand-rule"></div>
+  </div>
+
+  <nav>
+    <button class="nav-btn active" onclick="switchTab('tab-beginning')">
+      <span class="nav-icon">✦</span> The Beginning
+    </button>
+    <button class="nav-btn" onclick="switchTab('tab-journey')">
+      <span class="nav-icon">🌿</span> My Journey
+    </button>
+    <button class="nav-btn" onclick="switchTab('tab-appointments')">
+      <span class="nav-icon">📋</span> Appointments
+    </button>
+    <button class="nav-btn" onclick="switchTab('tab-ultrasounds')">
+      <span class="nav-icon">🤍</span> Ultrasounds
+    </button>
+    <button class="nav-btn" onclick="switchTab('tab-ready')">
+      <span class="nav-icon">🪺</span> Getting Ready
+    </button>
+    <button class="nav-btn" onclick="switchTab('tab-theday')">
+      <span class="nav-icon">🌅</span> The Day
+    </button>
+    <button class="nav-btn" onclick="switchTab('tab-firstyear')">
+      <span class="nav-icon">🎀</span> First Year
+    </button>
+    <button class="nav-btn" onclick="switchTab('tab-keepforever')" style="color:var(--gold)">
+      <span class="nav-icon">✦</span> Keep Forever
+    </button>
+  </nav>
+
+  <div class="nav-save">
+    <button class="btn-save-main" onclick="exportJournal()">Save My Journal</button>
+    <div class="save-sub">Download your permanent backup file</div>
+  </div>
+</aside>
+
+<!-- ════════════════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════════════════ -->
+<main>
+
+<!-- ── TAB 1: THE BEGINNING ── -->
+<section id="tab-beginning" class="tab-panel active">
+  <div class="section-header">
+    <h2 class="section-title">The Beginning</h2>
+    <p class="section-hook">"There was a moment when everything changed. This is where you write it down."</p>
+  </div>
+
+  <div class="card grid-2">
+    <div>
+      <div class="card-title">Finding Out</div>
+      <div class="card-note">The exact moment. Before you told anyone.</div>
+      <label>The date you found out</label>
+      <input type="date" data-save="beg-date">
+      <label>Where were you?</label>
+      <input type="text" data-save="beg-where" placeholder="The bathroom. The doctor's office. Your car.">
+      <label>What did you feel in that first minute?</label>
+      <textarea data-save="beg-feeling" placeholder="Joy, fear, disbelief, all of it at once — there's no wrong answer."></textarea>
+      <label>The first person you told</label>
+      <input type="text" data-save="beg-first-told" placeholder="And what did you say?">
+    </div>
+    <div class="photo-slot">
+      <div class="photo-slot-icon">📷</div>
+      <div class="photo-slot-text">Upload a photo from this moment</div>
+      <div class="photo-slot-sub">The test, a journal page, anything</div>
+      <input type="file" accept="image/*" onchange="handlePhoto(this,'beg-photo')">
+      <img id="img-beg-photo" style="display:none;" alt="">
+      <div class="size-warning">Large photos are gently compressed to keep your journal fast forever.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">The Announcement</div>
+    <div class="grid-2">
+      <div>
+        <label>When you shared the news</label>
+        <input type="date" data-save="ann-date">
+        <label>Who you told first</label>
+        <input type="text" data-save="ann-who" placeholder="Family, friends, everyone at once...">
+        <label>How it went</label>
+        <textarea data-save="ann-how" placeholder="The plan, what actually happened, the reactions you'll never forget."></textarea>
+      </div>
+      <div class="photo-slot">
+        <div class="photo-slot-icon">🎉</div>
+        <div class="photo-slot-text">Announcement photo</div>
+        <input type="file" accept="image/*" onchange="handlePhoto(this,'ann-photo')">
+        <img id="img-ann-photo" style="display:none;" alt="">
+        <div class="size-warning">Compressed gently to save space.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Gender Reveal</div>
+    <div class="card-note">Only if you found out — and only what you want to remember.</div>
+    <div class="grid-2">
+      <div>
+        <label>Did you find out?</label>
+        <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+          <button class="reveal-btn" data-val="yes" onclick="setReveal('yes',this)">Yes, we found out</button>
+          <button class="reveal-btn" data-val="surprise" onclick="setReveal('surprise',this)">Kept it a surprise</button>
+          <button class="reveal-btn" data-val="birth" onclick="setReveal('birth',this)">Found out at birth</button>
+        </div>
+        <label>What did you think it would be beforehand?</label>
+        <input type="text" data-save="reveal-instinct" placeholder="Your gut feeling...">
+        <label>The moment of the reveal</label>
+        <textarea data-save="reveal-moment" placeholder="Where you were, who was there, what happened."></textarea>
+        <label>Your first reaction</label>
+        <textarea data-save="reveal-reaction" placeholder="Even if it surprised you."></textarea>
+      </div>
+      <div class="photo-slot">
+        <div class="photo-slot-icon">🎊</div>
+        <div class="photo-slot-text">Reveal photo or memory</div>
+        <input type="file" accept="image/*" onchange="handlePhoto(this,'reveal-photo')">
+        <img id="img-reveal-photo" style="display:none;" alt="">
+        <div class="size-warning">Compressed gently.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Early Days</div>
+    <div class="grid-2">
+      <div>
+        <label>Early symptoms you'll remember</label>
+        <textarea data-save="early-symptoms" placeholder="The exhaustion, the nausea, the cravings that made no sense."></textarea>
+        <label>What you were most afraid of</label>
+        <textarea data-save="early-fear" placeholder="You don't have to soften it."></textarea>
+      </div>
+      <div>
+        <label>What you were most hoping for</label>
+        <textarea data-save="early-hope" placeholder="Healthy, happy, here."></textarea>
+        <label>A note to yourself in these early weeks</label>
+        <textarea data-save="early-note" placeholder="What do you want to remember about right now?"></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TAB 2: MY JOURNEY ── -->
+<section id="tab-journey" class="tab-panel">
+  <div class="section-header">
+    <h2 class="section-title">My Journey</h2>
+    <p class="section-hook">"Tap a week. Write what you remember. There's no minimum entry size."</p>
+  </div>
+
+  <div class="weeks-grid" id="weeks-container"></div>
+
+  <div class="card">
+    <div class="week-label" id="week-label">Week 4</div>
+    <div class="grid-2">
+      <div>
+        <label>How I felt this week</label>
+        <textarea id="wk-feelings" oninput="saveWeek()" placeholder="Energy, emotions, quiet moments, hard ones too."></textarea>
+        <div class="grid-2">
+          <div>
+            <label>Cravings</label>
+            <input type="text" id="wk-cravings" oninput="saveWeek()" placeholder="Be specific. Bologna counts.">
+          </div>
+          <div>
+            <label>Symptoms</label>
+            <input type="text" id="wk-symptoms" oninput="saveWeek()" placeholder="Kicks, flutters, fatigue...">
+          </div>
+        </div>
+        <label>A memory from this week</label>
+        <textarea id="wk-memory" oninput="saveWeek()" style="min-height:80px" placeholder="One thing you don't want to forget."></textarea>
+      </div>
+      <div class="photo-slot">
+        <div class="photo-slot-icon">🌿</div>
+        <div class="photo-slot-text">Bump photo or memory</div>
+        <div class="photo-slot-sub">One per week, saved automatically</div>
+        <input type="file" accept="image/*" id="wk-photo-input">
+        <img id="wk-photo-preview" style="display:none;" alt="">
+        <div class="size-warning">Large photos are compressed to keep your journal snappy forever.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TAB 3: APPOINTMENTS ── -->
+<section id="tab-appointments" class="tab-panel">
+  <div class="section-header">
+    <h2 class="section-title">Appointments</h2>
+    <p class="section-hook">"Every heartbeat check. Every question answered. Every good news moment."</p>
+  </div>
+
+  <div class="card">
+    <div style="display:grid;grid-template-columns:130px 70px 1fr 2fr auto;gap:12px;margin-bottom:8px;">
+      <div class="col-header">Date</div>
+      <div class="col-header">Week</div>
+      <div class="col-header">Provider</div>
+      <div class="col-header">Notes & What They Said</div>
+      <div></div>
+    </div>
+    <div id="appt-list"></div>
+    <button class="btn-add" onclick="addAppt()">+ Add Appointment</button>
+  </div>
+</section>
+
+<!-- ── TAB 4: ULTRASOUNDS ── -->
+<section id="tab-ultrasounds" class="tab-panel">
+  <div class="section-header">
+    <h2 class="section-title">Ultrasounds</h2>
+    <p class="section-hook">"A window into their secret world before they arrive."</p>
+  </div>
+  <div id="ultrasound-list"></div>
+  <button class="btn-add" onclick="addUltrasound()">+ Log a New Scan</button>
+</section>
+
+<!-- ── TAB 5: GETTING READY ── -->
+<section id="tab-ready" class="tab-panel">
+  <div class="section-header">
+    <h2 class="section-title">Getting Ready</h2>
+    <p class="section-hook">"Preparing the nest. Dreaming of names. Making space for someone new."</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Birth Plan & Preferences</div>
+    <div class="card-note">Not a contract — just your intentions. The things that matter to you.</div>
+    <div class="grid-2">
+      <div>
+        <label>What kind of birth experience do you hope for?</label>
+        <textarea data-save="bp-hope" placeholder="Atmosphere, pain management preferences, who you want in the room."></textarea>
+        <label>What are you most nervous about?</label>
+        <textarea data-save="bp-nervous" placeholder="It's okay to say it out loud here."></textarea>
+      </div>
+      <div>
+        <label>Golden hour wishes</label>
+        <textarea data-save="bp-golden" placeholder="Delayed cord clamping, skin to skin, quiet — whatever matters to you."></textarea>
+        <label>Anything else your care team should know</label>
+        <textarea data-save="bp-notes" placeholder="Allergies, previous experiences, specific requests."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Hospital Bag</div>
+    <div class="grid-2">
+      <div>
+        <label>For you</label>
+        <textarea data-save="bag-you" placeholder="Cozy robe, lip balm, long phone charger, your own pillow..."></textarea>
+      </div>
+      <div>
+        <label>For baby</label>
+        <textarea data-save="bag-baby" placeholder="Coming home outfit (two sizes, just in case), swaddles, car seat ready..."></textarea>
+      </div>
+    </div>
+    <label>Don't forget</label>
+    <textarea data-save="bag-forget" placeholder="Insurance card, birth plan printed, the playlist."></textarea>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Nursery</div>
+    <div class="grid-2">
+      <div>
+        <label>What the nursery looks like</label>
+        <textarea data-save="nursery-desc" placeholder="Colors, vibe, what you imagined vs what happened."></textarea>
+        <label>Still needs</label>
+        <textarea data-save="nursery-needs" placeholder="The things still on the list."></textarea>
+      </div>
+      <div class="photo-slot">
+        <div class="photo-slot-icon">🪺</div>
+        <div class="photo-slot-text">Nursery photo</div>
+        <input type="file" accept="image/*" onchange="handlePhoto(this,'nursery-photo')">
+        <img id="img-nursery-photo" style="display:none;" alt="">
+        <div class="size-warning">Compressed gently.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Baby Names</div>
+    <div class="card-note">The frontrunners, the ones that didn't make it, and the one you chose.</div>
+    <div class="names-grid">
+      <div>
+        <label>Names we love</label>
+        <textarea data-save="names-love" placeholder="The ones that keep coming back."></textarea>
+      </div>
+      <div>
+        <label>Names we ruled out</label>
+        <textarea data-save="names-out" placeholder="The ones that didn't make it. The stories are often good."></textarea>
+      </div>
+    </div>
+    <label style="margin-top:16px">The name we chose</label>
+    <input type="text" data-save="names-chosen" placeholder="Only if you want to write it down before the birth.">
+    <label>Why this name</label>
+    <textarea data-save="names-why" placeholder="The meaning, the person it honors, the reason it feels right."></textarea>
+  </div>
+</section>
+
+<!-- ── TAB 6: THE DAY ── -->
+<section id="tab-theday" class="tab-panel">
+  <div class="section-header">
+    <h2 class="section-title">The Day</h2>
+    <p class="section-hook">"The day that split your life into before and after."</p>
+  </div>
+
+  <div class="card card-blush">
+    <div class="grid-3">
+      <div>
+        <label>Date & Time of Arrival</label>
+        <input type="text" data-save="day-time" placeholder="e.g., Oct 28 at 6:14 AM">
+      </div>
+      <div>
+        <label>Weight & Length</label>
+        <input type="text" data-save="day-stats" placeholder="7 lbs 4 oz, 20 inches">
+      </div>
+      <div>
+        <label>Who Was There</label>
+        <input type="text" data-save="day-who" placeholder="Partner, nurses, doula...">
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Birth Story</div>
+    <div class="card-note">Answer what you can. Leave the rest for later. There's no wrong way to tell this story.</div>
+
+    <div class="prompt-block">
+      <div class="prompt-q">Where were you when it started?</div>
+      <textarea data-save="birth-q1" placeholder="Home, the grocery store, asleep at 3am — wherever you were."></textarea>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-q">Who did you call first, and what did you say?</div>
+      <textarea data-save="birth-q2" placeholder="The exact words, if you remember them."></textarea>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-q">What was the drive or journey there like?</div>
+      <textarea data-save="birth-q3" placeholder="The radio, the conversation, the silence."></textarea>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-q">What was the hardest moment?</div>
+      <textarea data-save="birth-q4" placeholder="You don't have to soften it."></textarea>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-q">What kept you going?</div>
+      <textarea data-save="birth-q5" placeholder="A person, a voice, something inside you."></textarea>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-q">The moment she arrived — what happened?</div>
+      <textarea data-save="birth-q6" style="min-height:130px" placeholder="As much or as little as you want to say."></textarea>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-q">The first thing you said or thought.</div>
+      <textarea data-save="birth-q7" placeholder="Even if it surprises you."></textarea>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-q">What do you want her to know about the day she was born?</div>
+      <textarea data-save="birth-q8" style="min-height:130px" placeholder="Write it to her, if you want. She'll read it someday."></textarea>
+    </div>
+  </div>
+
+  <div class="card grid-2">
+    <div class="photo-slot">
+      <div class="photo-slot-icon">🌅</div>
+      <div class="photo-slot-text">First photo together</div>
+      <input type="file" accept="image/*" onchange="handlePhoto(this,'birth-photo1')">
+      <img id="img-birth-photo1" style="display:none;" alt="">
+      <div class="size-warning">Compressed gently.</div>
+    </div>
+    <div class="photo-slot">
+      <div class="photo-slot-icon">🤍</div>
+      <div class="photo-slot-text">Another memory from The Day</div>
+      <input type="file" accept="image/*" onchange="handlePhoto(this,'birth-photo2')">
+      <img id="img-birth-photo2" style="display:none;" alt="">
+      <div class="size-warning">Compressed gently.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TAB 7: FIRST YEAR ── -->
+<section id="tab-firstyear" class="tab-panel">
+  <div class="section-header">
+    <h2 class="section-title">The First Year</h2>
+    <p class="section-hook">"Tap a month before it blurs."</p>
+  </div>
+  <div id="firstyear-accordion"></div>
+</section>
+
+<!-- ── TAB 8: KEEP FOREVER ── -->
+<section id="tab-keepforever" class="tab-panel">
+  <div class="section-header">
+    <h2 class="section-title">Keep Forever</h2>
+    <p class="section-hook">"The digital longevity promise from Ever After Memory Co."</p>
+  </div>
+
+  <div class="letter-box">
+    <div class="letter-prose">
+      Dear Mama,
+      <br><br>
+      Memories are not meant to be rented, trapped behind corporate passwords, or erased when a subscription expires. We built this journal to belong entirely and exclusively to you.
+      <br><br>
+      Every craving logged, every fear written in the quiet hours, every bump photo, every name you considered — all of it lives securely within the private, local ecosystem of your own web browser. No trackers. No external servers. No one can see this but you.
+      <br><br>
+      To make certain these pages travel with you to your next device, and eventually find their way into your daughter's hands twenty-five years from now — click the button below. It packages everything into a single backup file that is forever yours.
+      <br><br>
+      Save it somewhere that matters. Your Google Drive. A USB drive in a box with her hospital bracelet. Emailed to yourself on her first birthday.
+      <br><br>
+      This journal is not an app. It will not be discontinued. HTML is the language the entire internet is built on — it worked in 1995 and it will work in 2045. Your story is safe.
+    </div>
+    <div class="letter-signoff">Warmly,<br>The Ever After Memory Co. Team</div>
+
+    <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--border);display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;">
+      <div>
+        <button class="btn-save-main" style="width:auto;padding:14px 32px;" onclick="exportJournal()">Download My Backup File</button>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:8px;">Creates a .json file with everything inside</div>
+      </div>
+      <div style="flex:1;min-width:240px;">
+        <label style="color:var(--text);font-weight:600;font-size:12px;margin-bottom:6px;">Restore from a backup file</label>
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Moving to a new device? Import your backup and everything appears instantly.</div>
+        <input type="file" id="import-input" accept=".json" onchange="importJournal(this)" style="font-size:12px;margin-bottom:0;">
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div id="save-toast">✦ Saved</div>
+
+<!-- ════════════════════════════════════════════════
+     REVEAL BUTTON STYLES (inline so no class conflict)
+════════════════════════════════════════════════ -->
+<style>
+.reveal-btn {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: all 0.15s;
+  font-family: 'DM Sans', sans-serif;
+}
+.reveal-btn:hover { border-color: var(--blush); color: var(--blush); }
+.reveal-btn.selected { background: var(--blush); color: white; border-color: var(--blush); font-weight: 600; }
+</style>
+
+<script>
+// ── STATE ──
+let store = {
+  texts: {}, images: {}, reveal: '',
+  appointments: [], ultrasounds: [],
+  weeks: {}, firstYear: {}
+};
+let activeWeek = 4;
+const KEY = 'EAMC_PJ_Ecru_v1';
+
+// ── INIT ──
+window.onload = () => {
+  loadStore();
+  bindTextInputs();
+  renderWeeks();
+  renderAppts();
+  renderUltrasounds();
+  renderFirstYear();
+  selectWeek(4);
+  restoreReveal();
+  restoreImages();
+};
+
+// ── TAB SWITCHING ──
+function switchTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const btn = Array.from(document.querySelectorAll('.nav-btn'))
+    .find(b => b.getAttribute('onclick').includes(id));
+  if (btn) btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── STORAGE ──
+function loadStore() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) store = Object.assign(store, JSON.parse(raw));
+    if (!store.texts)        store.texts = {};
+    if (!store.images)       store.images = {};
+    if (!store.appointments) store.appointments = [];
+    if (!store.ultrasounds)  store.ultrasounds = [];
+    if (!store.weeks)        store.weeks = {};
+    if (!store.firstYear)    store.firstYear = {};
+  } catch(e) { console.warn('Load error'); }
+}
+
+let saveTimer;
+function save() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    try { localStorage.setItem(KEY, JSON.stringify(store)); toast(); }
+    catch(e) { console.warn('Save error - storage may be full'); }
+  }, 500);
+}
+
+function toast() {
+  const t = document.getElementById('save-toast');
+  t.style.opacity = 1;
+  setTimeout(() => t.style.opacity = 0, 1800);
+}
+
+// ── TEXT INPUTS ──
+function bindTextInputs() {
+  document.querySelectorAll('[data-save]').forEach(el => {
+    const k = el.getAttribute('data-save');
+    if (store.texts[k]) el.value = store.texts[k];
+    el.addEventListener('input', () => { store.texts[k] = el.value; save(); });
+  });
+}
+
+// ── PHOTO UPLOADS ──
+function handlePhoto(input, key) {
+  const file = input.files[0];
+  if (!file) return;
+  const slot = input.closest('.photo-slot');
+  const warn = slot?.querySelector('.size-warning');
+  if (file.size > 800000 && warn) warn.style.display = 'block';
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      let w = img.width, h = img.height;
+      const max = 900;
+      if (w > h && w > max) { h = h*max/w; w = max; }
+      else if (h > w && h > max) { w = w*max/h; h = max; }
+      else if (w > max) { h = h*max/w; w = max; }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      const data = canvas.toDataURL('image/jpeg', 0.82);
+      store.images[key] = data;
+      const preview = document.getElementById('img-' + key);
+      if (preview) { preview.src = data; preview.style.display = 'block'; }
+      save();
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function restoreImages() {
+  Object.entries(store.images).forEach(([key, src]) => {
+    const el = document.getElementById('img-' + key);
+    if (el) { el.src = src; el.style.display = 'block'; }
+  });
+}
+
+// ── GENDER REVEAL BUTTONS ──
+function setReveal(val, btn) {
+  document.querySelectorAll('.reveal-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  store.reveal = val;
+  save();
+}
+
+function restoreReveal() {
+  if (store.reveal) {
+    const btn = document.querySelector(`.reveal-btn[data-val="${store.reveal}"]`);
+    if (btn) btn.classList.add('selected');
+  }
+}
+
+// ── WEEKS ──
+function renderWeeks() {
+  const c = document.getElementById('weeks-container');
+  c.innerHTML = '';
+  for (let w = 4; w <= 40; w++) {
+    const btn = document.createElement('button');
+    btn.className = 'btn-week' + (w === activeWeek ? ' active' : '');
+    btn.textContent = `Wk ${w}`;
+    btn.onclick = () => selectWeek(w);
+    c.appendChild(btn);
+  }
+}
+
+function selectWeek(w) {
+  activeWeek = w;
+  document.querySelectorAll('.btn-week').forEach(b =>
+    b.classList.toggle('active', b.textContent === `Wk ${w}`)
+  );
+  document.getElementById('week-label').textContent = `Week ${w}`;
+  const d = store.weeks[w] || {};
+  document.getElementById('wk-feelings').value = d.feelings || '';
+  document.getElementById('wk-cravings').value  = d.cravings  || '';
+  document.getElementById('wk-symptoms').value  = d.symptoms  || '';
+  document.getElementById('wk-memory').value    = d.memory    || '';
+  const prev = document.getElementById('wk-photo-preview');
+  const warn = document.getElementById('wk-photo-input').closest('.photo-slot')?.querySelector('.size-warning');
+  if (warn) warn.style.display = 'none';
+  if (d.photo) { prev.src = d.photo; prev.style.display = 'block'; }
+  else         { prev.style.display = 'none'; prev.src = ''; }
+
+  document.getElementById('wk-photo-input').onchange = function() {
+    const file = this.files[0]; if (!file) return;
+    if (file.size > 800000 && warn) warn.style.display = 'block';
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let cw = img.width, ch = img.height;
+        const max = 900;
+        if (cw > ch && cw > max) { ch = ch*max/cw; cw = max; }
+        else if (ch > cw && ch > max) { cw = cw*max/ch; ch = max; }
+        else if (cw > max) { ch = ch*max/cw; cw = max; }
+        canvas.width = cw; canvas.height = ch;
+        canvas.getContext('2d').drawImage(img,0,0,cw,ch);
+        const data = canvas.toDataURL('image/jpeg',0.82);
+        if (!store.weeks[activeWeek]) store.weeks[activeWeek] = {};
+        store.weeks[activeWeek].photo = data;
+        prev.src = data; prev.style.display = 'block';
+        save();
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
+}
+
+function saveWeek() {
+  if (!store.weeks[activeWeek]) store.weeks[activeWeek] = {};
+  store.weeks[activeWeek].feelings = document.getElementById('wk-feelings').value;
+  store.weeks[activeWeek].cravings  = document.getElementById('wk-cravings').value;
+  store.weeks[activeWeek].symptoms  = document.getElementById('wk-symptoms').value;
+  store.weeks[activeWeek].memory    = document.getElementById('wk-memory').value;
+  save();
+}
+
+// ── APPOINTMENTS ──
+function renderAppts() {
+  const list = document.getElementById('appt-list');
+  list.innerHTML = '';
+  if (!store.appointments.length) store.appointments.push({date:'',week:'',provider:'',notes:''});
+  store.appointments.forEach((a, i) => {
+    const row = document.createElement('div');
+    row.className = 'dynamic-row';
+    row.innerHTML = `
+      <input type="date" value="${a.date}" oninput="updateAppt(${i},'date',this.value)">
+      <input type="text"  value="${a.week}" placeholder="Wk"  oninput="updateAppt(${i},'week',this.value)">
+      <input type="text"  value="${a.provider}" placeholder="Provider" oninput="updateAppt(${i},'provider',this.value)">
+      <input type="text"  value="${a.notes}" placeholder="Everything looks perfect..." oninput="updateAppt(${i},'notes',this.value)">
+      <button class="btn-del" onclick="delAppt(${i})">×</button>`;
+    list.appendChild(row);
+  });
+}
+
+function addAppt() { store.appointments.push({date:'',week:'',provider:'',notes:''}); renderAppts(); save(); }
+function updateAppt(i,f,v) { store.appointments[i][f]=v; save(); }
+function delAppt(i) { store.appointments.splice(i,1); renderAppts(); save(); }
+
+// ── ULTRASOUNDS ──
+function renderUltrasounds() {
+  const list = document.getElementById('ultrasound-list');
+  list.innerHTML = '';
+  if (!store.ultrasounds.length) store.ultrasounds.push({date:'',week:'',saw:'',felt:'',img:''});
+  store.ultrasounds.forEach((u, i) => {
+    const card = document.createElement('div');
+    card.className = 'card grid-2';
+    card.style.marginBottom = '24px';
+    card.innerHTML = `
+      <div>
+        <div class="grid-2" style="margin-bottom:14px">
+          <div><label>Date</label><input type="date" value="${u.date}" oninput="updateUltra(${i},'date',this.value)"></div>
+          <div><label>Week</label><input type="text" placeholder="20 weeks" value="${u.week}" oninput="updateUltra(${i},'week',this.value)"></div>
+        </div>
+        <label>What we saw</label>
+        <textarea placeholder="Counting ten perfectly formed toes, a strong heartbeat..." oninput="updateUltra(${i},'saw',this.value)" style="min-height:80px">${u.saw}</textarea>
+        <label>What I felt</label>
+        <textarea placeholder="Overwhelming awe. Relief. Love before you even knew what to call it." oninput="updateUltra(${i},'felt',this.value)" style="min-height:80px">${u.felt}</textarea>
+        <button class="btn-del" style="font-size:13px;color:var(--text-muted);" onclick="delUltra(${i})">Remove this scan</button>
+      </div>
+      <div class="photo-slot">
+        <div class="photo-slot-icon">🤍</div>
+        <div class="photo-slot-text">Upload ultrasound image</div>
+        <input type="file" accept="image/*" onchange="handleUltraPhoto(this,${i})">
+        <img id="ultra-img-${i}" src="${u.img}" style="display:${u.img?'block':'none'}" alt="">
+        <div class="size-warning">Compressed gently.</div>
+      </div>`;
+    list.appendChild(card);
+  });
+}
+
+function addUltrasound() { store.ultrasounds.push({date:'',week:'',saw:'',felt:'',img:''}); renderUltrasounds(); save(); }
+function updateUltra(i,f,v) { store.ultrasounds[i][f]=v; save(); }
+function delUltra(i) { store.ultrasounds.splice(i,1); renderUltrasounds(); save(); }
+
+function handleUltraPhoto(input, i) {
+  const file = input.files[0]; if (!file) return;
+  const slot = input.closest('.photo-slot');
+  const warn = slot?.querySelector('.size-warning');
+  if (file.size > 800000 && warn) warn.style.display='block';
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      let w = img.width, h = img.height, max = 900;
+      if (w > max) { h = h*max/w; w = max; }
+      if (h > max) { w = w*max/h; h = max; }
+      canvas.width=w; canvas.height=h;
+      canvas.getContext('2d').drawImage(img,0,0,w,h);
+      const data = canvas.toDataURL('image/jpeg',0.82);
+      store.ultrasounds[i].img = data;
+      const el = document.getElementById(`ultra-img-${i}`);
+      el.src=data; el.style.display='block';
+      save();
+    };
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── FIRST YEAR ACCORDION ──
+const MONTHS = [
+  'Month 1 — Fresh Arrival','Month 2','Month 3','Month 4',
+  'Month 5','Month 6 — Halfway to One','Month 7','Month 8',
+  'Month 9','Month 10','Month 11','Month 12 — First Birthday 🎂'
+];
+
+function renderFirstYear() {
+  const c = document.getElementById('firstyear-accordion');
+  c.innerHTML = '';
+  MONTHS.forEach((label, idx) => {
+    const k = `m${idx}`;
+    const d = store.firstYear[k] || {milestones:'',letter:''};
+    const item = document.createElement('div');
+    item.className = 'accordion-item';
+    item.innerHTML = `
+      <button class="accordion-header" onclick="toggleAccordion(this)">
+        <span style="font-family:'Cormorant Garamond',serif">${label}</span>
+        <span class="arr" style="font-size:16px;color:var(--text-muted)">↓</span>
+      </button>
+      <div class="accordion-content">
+        <div class="grid-2">
+          <div>
+            <label style="margin-top:10px">Milestones & Discoveries</label>
+            <textarea placeholder="First real smile, first laugh, first food, first steps..." oninput="saveMonth('${k}','milestones',this.value)">${d.milestones}</textarea>
+          </div>
+          <div>
+            <label style="margin-top:10px">A Letter to You This Month</label>
+            <textarea placeholder="Watching you discover the world this month..." oninput="saveMonth('${k}','letter',this.value)">${d.letter}</textarea>
+          </div>
+        </div>
+      </div>`;
+    c.appendChild(item);
+  });
+}
+
+function toggleAccordion(btn) {
+  const parent = btn.parentElement;
+  const wasOpen = parent.classList.contains('open');
+  document.querySelectorAll('.accordion-item').forEach(el => {
+    el.classList.remove('open');
+    el.querySelector('.arr').textContent = '↓';
+  });
+  if (!wasOpen) {
+    parent.classList.add('open');
+    btn.querySelector('.arr').textContent = '↑';
+  }
+}
+
+function saveMonth(k, field, val) {
+  if (!store.firstYear[k]) store.firstYear[k] = {};
+  store.firstYear[k][field] = val;
+  save();
+}
+
+// ── EXPORT / IMPORT ──
+function exportJournal() {
+  const data = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(store));
+  const a = document.createElement('a');
+  a.href = data;
+  a.download = 'EverAfter_Pregnancy_Journal_Backup.json';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+function importJournal(input) {
+  const file = input.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      store = Object.assign(store, JSON.parse(e.target.result));
+      localStorage.setItem(KEY, JSON.stringify(store));
+      window.location.reload();
+    } catch(err) {
+      alert('Could not read that backup file. Please make sure it is your original .json backup.');
+    }
+  };
+  reader.readAsText(file);
+}
+</script>
+</body>
+</html>
